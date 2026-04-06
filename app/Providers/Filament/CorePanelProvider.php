@@ -30,6 +30,7 @@ class CorePanelProvider extends PanelProvider
     public function panel(Panel $panel): Panel
     {
         return $panel
+            ->spa()
             ->default()
             ->id('core')
             ->path('core')
@@ -44,8 +45,6 @@ class CorePanelProvider extends PanelProvider
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
             ->widgets([
-                AccountWidget::class,
-                FilamentInfoWidget::class,
                 WeatherWidget::class,
             ])
             ->plugins([

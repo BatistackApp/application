@@ -25,6 +25,7 @@ class KnowledgeBasePanelProvider extends PanelProvider
     public function panel(Panel $panel): Panel
     {
         return $panel
+            ->spa()
             ->id('knowledge-base')
             ->path('knowledge-base')
             ->colors([
