@@ -39,4 +39,8 @@ return [
         'gemini_api_key' => env('GEMINI_API_KEY'),
     ],
 
+    'siren' => [
+        'api_key' => env('SIREN_API_KEY'),
+        'base_url' => env('SIREN_API_BASE_URL'),
+    ],
 ];
