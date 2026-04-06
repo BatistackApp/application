@@ -2,11 +2,13 @@
 
 namespace App\Providers;
 
+use BezhanSalleh\PanelSwitch\PanelSwitch;
 use Carbon\CarbonImmutable;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Validation\Rules\Password;
+use ToneGabes\Filament\Icons\Enums\Phosphor;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -24,6 +26,22 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->configureDefaults();
+        PanelSwitch::configureUsing(function (PanelSwitch $panelSwitch) {
+            $panelSwitch
+                ->panels([
+                    'core',
+                    'knowledge-base',
+                ])
+                ->modalHeading('Espaces')
+                ->icons([
+                    'core' => Phosphor::Wrench,
+                    'knowledge-base' => Phosphor::Book,
+                ])
+                ->labels([
+                    'core' => 'Configurations',
+                    'knowledge-base' => 'Base de connaissance',
+                ]);
+        });
     }
 
     /**

@@ -4,6 +4,7 @@ namespace App\Providers\Filament;
 
 use Ariefng\FilamentCalculator\CalculatorPlugin;
 use Arshaviras\WeatherWidget\Widgets\WeatherWidget;
+use BezhanSalleh\PanelSwitch\PanelSwitch;
 use Croustibat\FilamentJobsMonitor\FilamentJobsMonitorPlugin;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
