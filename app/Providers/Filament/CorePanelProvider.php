@@ -16,6 +16,7 @@ use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
 use Filament\Widgets\AccountWidget;
 use Filament\Widgets\FilamentInfoWidget;
+use FilamentInbox\FilamentInboxPlugin;
 use Guava\FilamentKnowledgeBase\Plugins\KnowledgeBaseCompanionPlugin;
 use Hydrat\TableLayoutToggle\TableLayoutTogglePlugin;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
@@ -52,10 +53,9 @@ class CorePanelProvider extends PanelProvider
                 TableLayoutTogglePlugin::make()
                     ->setDefaultLayout('list')
                     ->displayToggleAction(true),
-                FilamentJobsMonitorPlugin::make()
-                    ->enableNavigation(),
                 KnowledgeBaseCompanionPlugin::make()
                     ->knowledgeBasePanelId('knowledge-base'),
+                FilamentInboxPlugin::make(),
             ])
             ->middleware([
                 EncryptCookies::class,
@@ -68,6 +68,8 @@ class CorePanelProvider extends PanelProvider
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
             ])
+            ->databaseNotifications()
+            ->brandName('BATISTACK')
             ->authMiddleware([
                 Authenticate::class,
             ]);

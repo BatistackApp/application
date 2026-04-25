@@ -2,8 +2,6 @@
 
 namespace App\Filament\Resources\CompanyInfos;
 
-use App\Filament\Clusters\Settings\SettingsCluster;
-use App\Filament\Resources\CompanyInfos\Pages\CreateCompanyInfo;
 use App\Filament\Resources\CompanyInfos\Pages\EditCompanyInfo;
 use App\Filament\Resources\CompanyInfos\Pages\ListCompanyInfos;
 use App\Filament\Resources\CompanyInfos\Schemas\CompanyInfoForm;
@@ -14,14 +12,15 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
-use ToneGabes\Filament\Icons\Enums\Phosphor;
 
 class CompanyInfoResource extends Resource
 {
     protected static ?string $model = CompanyInfo::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::HomeModern;
+
     protected static ?string $navigationLabel = 'Entreprise';
+
     protected static ?string $breadcrumb = 'Entreprise';
 
     public static function form(Schema $schema): Schema
@@ -45,7 +44,6 @@ class CompanyInfoResource extends Resource
     {
         return [
             'index' => ListCompanyInfos::route('/'),
-            'create' => CreateCompanyInfo::route('/create'),
             'edit' => EditCompanyInfo::route('/{record}/edit'),
         ];
     }

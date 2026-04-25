@@ -40,10 +40,6 @@ class KnowledgeBasePanelProvider extends PanelProvider
                 KnowledgeBasePlugin::make(),
             ])
             ->discoverWidgets(in: app_path('Filament/KnowledgeBase/Widgets'), for: 'App\Filament\KnowledgeBase\Widgets')
-            ->widgets([
-                AccountWidget::class,
-                FilamentInfoWidget::class,
-            ])
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,

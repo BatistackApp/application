@@ -17,6 +17,7 @@ return new class extends Migration {
             $table->string('siret');
             $table->string('num_tva')->nullable();
             $table->string('ape');
+            $table->decimal('capital', 14, 2)->default(0);
             $table->string('telephone')->nullable();
             $table->string('fax')->nullable();
             $table->string('email')->nullable();

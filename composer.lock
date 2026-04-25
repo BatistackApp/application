@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c5a49f080d68b3059c6b3b6ded8fada0",
+    "content-hash": "435e1f3cea899d8391fe4b9975ea36c8",
     "packages": [
         {
             "name": "archtechx/enums",
@@ -246,6 +246,70 @@
                 "source": "https://github.com/BatistackApp/filament-map-picker/tree/1.0.0"
             },
             "time": "2026-04-06T13:33:11+00:00"
+        },
+        {
+            "name": "batistackapp/progress-stepper",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/BatistackApp/progress-stepper.git",
+                "reference": "e76022c5a3a268044738dbde9ad530682feda8de"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/BatistackApp/progress-stepper/zipball/e76022c5a3a268044738dbde9ad530682feda8de",
+                "reference": "e76022c5a3a268044738dbde9ad530682feda8de",
+                "shasum": ""
+            },
+            "require": {
+                "filament/filament": "^5.0",
+                "filament/forms": "^5.0",
+                "filament/infolists": "^5.0",
+                "php": "^8.2",
+                "spatie/laravel-package-tools": "^1.15"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Webkul\\ProgressStepper\\ProgressStepperServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Webkul\\ProgressStepper\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Webkul",
+                    "email": "support@webkul.com",
+                    "role": "Developer"
+                },
+                {
+                    "name": "syltheron",
+                    "role": "Contributor"
+                }
+            ],
+            "description": "A Filament v5 progress-stepper form & infolist component for visualising workflow state as a horizontal arrow-stepper.",
+            "homepage": "https://github.com/aureuserp/progress-stepper",
+            "keywords": [
+                "filament",
+                "filament-plugin",
+                "filamentphp",
+                "laravel",
+                "progress-stepper",
+                "webkul"
+            ],
+            "support": {
+                "source": "https://github.com/BatistackApp/progress-stepper/tree/1.0.0"
+            },
+            "time": "2026-04-25T17:13:32+00:00"
         },
         {
             "name": "batistackapp/weather-widget",
@@ -8378,6 +8442,72 @@
             "time": "2026-03-22T23:03:24+00:00"
         },
         {
+            "name": "qalainau/filament-inbox",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/qalainau/filament-inbox.git",
+                "reference": "3c2df374237db3693fc2221c2a09b0dfff49f579"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/qalainau/filament-inbox/zipball/3c2df374237db3693fc2221c2a09b0dfff49f579",
+                "reference": "3c2df374237db3693fc2221c2a09b0dfff49f579",
+                "shasum": ""
+            },
+            "require": {
+                "filament/filament": "^5.0",
+                "php": "^8.2",
+                "spatie/laravel-package-tools": "^1.14"
+            },
+            "require-dev": {
+                "laravel/pint": "^1.0",
+                "orchestra/testbench": "^10.0",
+                "pestphp/pest": "^4.0",
+                "pestphp/pest-plugin-laravel": "^4.0",
+                "pestphp/pest-plugin-livewire": "^4.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "FilamentInbox\\FilamentInboxServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "FilamentInbox\\": "src/",
+                    "FilamentInbox\\Database\\Factories\\": "database/factories/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Qalainau",
+                    "homepage": "https://github.com/qalainau"
+                }
+            ],
+            "description": "Email-like inbox messaging plugin for Filament v5 — threads, starring, trash, forwarding, read receipts, and multi-tenancy out of the box.",
+            "homepage": "https://github.com/qalainau/filament-inbox",
+            "keywords": [
+                "filament",
+                "filament-plugin",
+                "inbox",
+                "laravel",
+                "livewire",
+                "messaging"
+            ],
+            "support": {
+                "issues": "https://github.com/qalainau/filament-inbox/issues",
+                "source": "https://github.com/qalainau/filament-inbox/tree/v1.0.0"
+            },
+            "time": "2026-04-24T11:10:08+00:00"
+        },
+        {
             "name": "ralouphie/getallheaders",
             "version": "3.0.3",
             "source": {
@@ -12090,6 +12220,70 @@
                 "source": "https://github.com/tijsverkoyen/CssToInlineStyles/tree/v2.4.0"
             },
             "time": "2025-12-02T11:56:42+00:00"
+        },
+        {
+            "name": "tinusg/filament-company-logo-column",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tinusg/filament-company-logo-column.git",
+                "reference": "460ff1f96c8b26dfb9f366118ba181552114ef9e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tinusg/filament-company-logo-column/zipball/460ff1f96c8b26dfb9f366118ba181552114ef9e",
+                "reference": "460ff1f96c8b26dfb9f366118ba181552114ef9e",
+                "shasum": ""
+            },
+            "require": {
+                "filament/tables": "^5.0",
+                "illuminate/support": "^11.0|^12.0|^13.0",
+                "php": "^8.2"
+            },
+            "require-dev": {
+                "laravel/pint": "^1.0",
+                "orchestra/testbench": "^11.0",
+                "pestphp/pest": "^4.0",
+                "pestphp/pest-plugin-laravel": "^4.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "TinusG\\FilamentCompanyLogoColumn\\CompanyLogoColumnServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "TinusG\\FilamentCompanyLogoColumn\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Tinus G",
+                    "homepage": "https://github.com/tinusg"
+                }
+            ],
+            "description": "A Filament table column that renders a company logo via Logo.dev from a URL or domain",
+            "homepage": "https://github.com/tinusg/filament-company-logo-column",
+            "keywords": [
+                "column",
+                "company",
+                "filament",
+                "laravel",
+                "logo",
+                "logo.dev"
+            ],
+            "support": {
+                "issues": "https://github.com/tinusg/filament-company-logo-column/issues",
+                "source": "https://github.com/tinusg/filament-company-logo-column/tree/v1.0.0"
+            },
+            "time": "2026-04-21T08:15:04+00:00"
         },
         {
             "name": "tonegabes/filament-better-options",

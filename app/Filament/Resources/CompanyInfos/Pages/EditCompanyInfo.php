@@ -9,11 +9,5 @@ use Filament\Resources\Pages\EditRecord;
 class EditCompanyInfo extends EditRecord
 {
     protected static string $resource = CompanyInfoResource::class;
-
-    protected function getHeaderActions(): array
-    {
-        return [
-            DeleteAction::make(),
-        ];
-    }
+    protected static ?string $title = "Editer les informations de l'entreprise";
 }
