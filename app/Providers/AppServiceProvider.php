@@ -34,15 +34,18 @@ class AppServiceProvider extends ServiceProvider
                 ->panels([
                     'core',
                     'knowledge-base',
+                    'tiers',
                 ])
                 ->modalHeading('Espaces')
                 ->icons([
                     'core' => Phosphor::Wrench,
                     'knowledge-base' => Phosphor::Book,
+                    'tiers' => Phosphor::UserCircleBold,
                 ])
                 ->labels([
                     'core' => 'Configurations',
                     'knowledge-base' => 'Base de connaissance',
+                    'tiers' => 'Tiers',
                 ]);
         });
 

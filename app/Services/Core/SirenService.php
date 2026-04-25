@@ -45,12 +45,14 @@ class SirenService
         $identifier = preg_replace('/\s+/', '', $identifier);
 
         // On met en cache le résultat de l'existence pendant 30 jours
-        return Cache::remember("insee_exists_{$identifier}", now()->addDays(30), function () use ($identifier) {
+        return Cache::remember("insee_exists_{$identifier}", now()->addDay(), function () use ($identifier) {
             $isSiret = strlen($identifier) === 14;
             $endpoint = $isSiret ? "/siret/{$identifier}" : "/siren/{$identifier}";
 
             try {
-                $response = Http::withToken($this->api_key)
+                $response = Http::withHeaders([
+                    'X-INSEE-Api-Key-Integration' => $this->api_key,
+                ])
                     ->get($this->base_url.$endpoint.'?champs=siret,siren');
 
                 return $response->successful();
@@ -78,7 +80,9 @@ class SirenService
             $endpoint = $isSiret ? "/siret/{$identifier}" : "/siren/{$identifier}";
 
             try {
-                $response = Http::withToken($this->api_key)
+                $response = Http::withHeaders([
+                    'X-INSEE-Api-Key-Integration' => $this->api_key,
+                ])
                     ->get($this->base_url.$endpoint);
 
                 if ($response->successful()) {

@@ -11,7 +11,7 @@ return new class extends Migration {
         Schema::create('tiers_settings', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Tiers::class)->constrained()->cascadeOnDelete();
-            $table->decimal('outstanding')->nullable();
+            $table->decimal('outstanding', 10, 2)->default(0);
             $table->boolean('followup')->default(false);
             $table->json('followup_terms')->nullable();
         });

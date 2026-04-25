@@ -29,6 +29,7 @@ class TiersSettings extends Model
         return [
             'followup' => 'boolean',
             'followup_terms' => 'array',
+            'outstanding' => 'decimal:2',
         ];
     }
 }

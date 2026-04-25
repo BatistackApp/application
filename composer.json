@@ -9,6 +9,7 @@
         "php": "^8.3",
         "ext-fileinfo": "*",
         "ariefng/filament-calculator": "^1.2",
+        "batistackapp/activity-log": "^1.0@alpha",
         "batistackapp/filament-map-picker": "^1.0",
         "batistackapp/progress-stepper": "^1.0",
         "batistackapp/weather-widget": "^1.0",
@@ -33,6 +34,8 @@
         "opcodesio/log-viewer": "^3.24",
         "qalainau/filament-inbox": "^1.0",
         "saade/filament-autograph": "^4.1",
+        "spatie/browsershot": "^5.2",
+        "spatie/laravel-activitylog": "^5.0",
         "spatie/laravel-medialibrary": "^11.21",
         "tapp/filament-progress-bar-column": "^1.0",
         "tinusg/filament-company-logo-column": "^1.0",
@@ -126,7 +129,7 @@
             "php-http/discovery": true
         }
     },
-    "minimum-stability": "stable",
+    "minimum-stability": "alpha",
     "prefer-stable": true,
     "repositories": [
         {

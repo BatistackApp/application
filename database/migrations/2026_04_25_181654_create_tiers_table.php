@@ -10,7 +10,7 @@ return new class extends Migration {
         Schema::create('tiers', function (Blueprint $table) {
             $table->id();
             $table->string('code')->unique();
-            $table->string('civility');
+            $table->string('civility')->nullable();
             $table->string('name');
             $table->string('typology');
             $table->string('category');

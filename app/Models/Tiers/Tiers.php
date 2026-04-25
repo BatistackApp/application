@@ -6,14 +6,21 @@ use App\Enums\Civility;
 use App\Enums\Tiers\TiersCategory;
 use App\Enums\Tiers\TiersStatus;
 use App\Enums\Tiers\TiersTypology;
+use App\Observers\Tiers\TiersObserver;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Relaticle\ActivityLog\Concerns\InteractsWithTimeline;
+use Relaticle\ActivityLog\Contracts\HasTimeline;
+use Relaticle\ActivityLog\Timeline\TimelineBuilder;
+use Spatie\Activitylog\Models\Concerns\LogsActivity;
 
-class Tiers extends Model
+#[ObservedBy([TiersObserver::class])]
+class Tiers extends Model implements HasTimeline
 {
-    use HasFactory;
+    use HasFactory, InteractsWithTimeline, LogsActivity;
 
     protected $fillable = [
         'civility',
@@ -52,5 +59,12 @@ class Tiers extends Model
     public function setting(): HasOne
     {
         return $this->hasOne(TiersSettings::class);
+    }
+
+    public function timeline(): TimelineBuilder
+    {
+        return TimelineBuilder::make($this)
+            ->fromActivityLog()
+            ->fromActivityLogOf(['addresses', 'contacts']);
     }
 }

@@ -2,7 +2,6 @@
 
 namespace App\Filament\Widgets;
 
-use App\Enums\UnitOfMesure;
 use App\Models\Core\CompanyInfo;
 use Filament\Actions\Action;
 use Filament\Schemas\Components\Callout;
@@ -19,18 +18,20 @@ class AlertOverview extends Widget implements HasSchemas
     protected string $view = 'filament.widgets.alert-overview';
 
     protected int|string|array $columnSpan = 'full';
+
     protected static ?int $sort = -1;
 
     public function infolist(Schema $schema): Schema
     {
-        $true_company = CompanyInfo::exists();
+        $true_company = CompanyInfo::where('name', 'Demo Company')->exists();
+
         return $schema
             ->schema([
                 Callout::make('Configuration requise')
                     ->description('Votre entreprise n\'est actuellement pas enregistrer dans le logiciel')
                     ->info()
                     ->icon(Phosphor::ExclamationMark)
-                    ->visible(fn() => !$true_company)
+                    ->visible(fn () => ! $true_company)
                     ->columnSpanFull()
                     ->controls([
                         Action::make('redirect')
@@ -38,7 +39,7 @@ class AlertOverview extends Widget implements HasSchemas
                             ->color('danger')
                             ->icon(Phosphor::Wrench)
                             ->url('/core/company-infos'),
-                    ])
+                    ]),
 
             ]);
     }

@@ -16,11 +16,13 @@
 @source '../../vendor/livewire/flux/stubs/**/*.blade.php';
 @source '../../vendor/harvirsidhu/filament-cards/resources/views';
 @source '../../vendor/guava/calendar/resources/**/*';
-@source '../../../../vendor/guava/filament-knowledge-base/src/**/*';
-@source '../../../../vendor/guava/filament-knowledge-base/resources/views/**/*';
-@source '../../../../vendor/saade/filament-autograph/resources/views/**/*.blade.php';
-@source '../../../../vendor/tapp/filament-progress-bar-column';
-@source '../../../../vendor/bezhansalleh/filament-panel-switch/resources/views/**/*.blade.php';
+@source '../../vendor/guava/filament-knowledge-base/src/**/*';
+@source '../../vendor/guava/filament-knowledge-base/resources/views/**/*';
+@source '../../vendor/saade/filament-autograph/resources/views/**/*.blade.php';
+@source '../../vendor/tapp/filament-progress-bar-column';
+@source '../../vendor/bezhansalleh/filament-panel-switch/resources/views/**/*.blade.php';
+@source '../../vendor/relaticle/activity-log/resources/views/**/*';
+
 
 @custom-variant dark (&:where(.dark, .dark *));
 

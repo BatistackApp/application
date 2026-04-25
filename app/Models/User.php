@@ -12,13 +12,18 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
 use Laravel\Fortify\TwoFactorAuthenticatable;
+use Relaticle\ActivityLog\Concerns\InteractsWithTimeline;
+use Relaticle\ActivityLog\Contracts\HasTimeline;
+use Relaticle\ActivityLog\Timeline\Sources\RelatedModelSource;
+use Relaticle\ActivityLog\Timeline\TimelineBuilder;
+use Spatie\Activitylog\Models\Concerns\LogsActivity;
 
 #[Fillable(['name', 'email', 'password'])]
 #[Hidden(['password', 'two_factor_secret', 'two_factor_recovery_codes', 'remember_token'])]
-class User extends Authenticatable
+class User extends Authenticatable implements HasTimeline
 {
     /** @use HasFactory<UserFactory> */
-    use HasFactory, Notifiable, TwoFactorAuthenticatable, HasInbox;
+    use HasFactory, HasInbox, InteractsWithTimeline, LogsActivity, Notifiable, TwoFactorAuthenticatable;
 
     /**
      * Get the attributes that should be cast.
@@ -43,5 +48,29 @@ class User extends Authenticatable
             ->take(2)
             ->map(fn ($word) => Str::substr($word, 0, 1))
             ->implode('');
+    }
+
+    public function timeline(): TimelineBuilder
+    {
+        return TimelineBuilder::make($this)
+            ->fromActivityLog()
+            ->fromActivityLogOf(['emails', 'notes', 'tasks'])
+            ->fromRelation('emails', function (RelatedModelSource $source): void {
+                $source
+                    ->event(
+                        column: 'sent_at',
+                        event: 'email_sent',
+                        icon: 'heroicon-o-paper-airplane',
+                        color: 'primary',
+                    )
+                    ->event(
+                        column: 'received_at',
+                        event: 'email_received',
+                        icon: 'heroicon-o-inbox-arrow-down',
+                        color: 'info',
+                    )
+                    ->title(fn ($email): string => $email->subject ?? 'Email')
+                    ->causer(fn ($email) => $email->from->first());
+            });
     }
 }
