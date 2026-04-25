@@ -33,6 +33,7 @@ class Tiers extends Model implements HasTimeline
         'code',
         'dgpd_concilient',
         'website',
+        'status',
     ];
 
     protected function casts(): array

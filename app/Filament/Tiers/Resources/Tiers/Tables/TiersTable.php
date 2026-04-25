@@ -4,6 +4,7 @@ namespace App\Filament\Tiers\Resources\Tiers\Tables;
 
 use App\Enums\Tiers\TiersCategory;
 use App\Enums\Tiers\TiersStatus;
+use App\Filament\Tiers\Resources\Tiers\Actions\PrintAction;
 use App\Models\Tiers\Tiers;
 use App\Services\Tiers\TiersDocumentGenerator;
 use Filament\Actions\Action;
@@ -62,36 +63,7 @@ class TiersTable
                 EditAction::make()->iconButton()->tooltip('Modifier'),
             ])
             ->headerActions([
-                Action::make('print_list')
-                    ->iconButton()
-                    ->tooltip('Imprimer Liste')
-                    ->icon(Phosphor::Printer)
-                    ->schema([
-                        Select::make('type')
-                            ->label('Type')
-                            ->options([
-                                'ficheTiers' => 'Fiche Tiers',
-                                'listeTiers' => 'Liste Tiers',
-                            ])
-                            ->live(),
-
-                        Select::make('tiers_id')
-                            ->label('Tiers')
-                            ->options(Tiers::all()->pluck('name', 'id'))
-                            ->searchable()
-                            ->visible(fn (Get $get) => $get('type') === 'ficheTiers'),
-                    ])
-                    ->action(function (TiersDocumentGenerator $generator, array $data) {
-                        if ($data['type'] === 'ficheTiers') {
-                            $tiers = Tiers::find($data['tiers_id']);
-                        }
-                        $pdf = match ($data['type']) {
-                            'listeTiers' => $generator->listeTiers(),
-                            'ficheTiers' => $generator->ficheTiers($tiers)
-                        };
-
-                        return response()->download($pdf);
-                    }),
+                PrintAction::action(),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
