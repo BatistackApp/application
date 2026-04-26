@@ -2,9 +2,11 @@
 
 namespace App\Models\Tiers;
 
+use App\Enums\Tiers\TiersAddressType;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\HtmlString;
 
 class TiersAddress extends Model
 {
@@ -27,5 +29,17 @@ class TiersAddress extends Model
     public function tiers(): BelongsTo
     {
         return $this->belongsTo(Tiers::class);
+    }
+
+    protected function casts(): array
+    {
+        return [
+            'address_type' => TiersAddressType::class,
+        ];
+    }
+
+    public function getFullAddress(): HtmlString
+    {
+        return new HtmlString("{$this->address}<br>{$this->postal_code} {$this->city}<br>{$this->country}");
     }
 }

@@ -6,6 +6,8 @@ use App\Filament\Tiers\Resources\Tiers\Pages\CreateTiers;
 use App\Filament\Tiers\Resources\Tiers\Pages\EditTiers;
 use App\Filament\Tiers\Resources\Tiers\Pages\ListTiers;
 use App\Filament\Tiers\Resources\Tiers\Pages\ViewTiers;
+use App\Filament\Tiers\Resources\Tiers\RelationManagers\AddressesRelationManager;
+use App\Filament\Tiers\Resources\Tiers\RelationManagers\ContactsRelationManager;
 use App\Filament\Tiers\Resources\Tiers\Schemas\TiersForm;
 use App\Filament\Tiers\Resources\Tiers\Schemas\TiersInfolist;
 use App\Filament\Tiers\Resources\Tiers\Tables\TiersTable;
@@ -44,7 +46,8 @@ class TiersResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            AddressesRelationManager::class,
+            ContactsRelationManager::class,
         ];
     }
 
