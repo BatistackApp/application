@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Enums\TypeAccount;
 use Database\Factories\UserFactory;
 use FilamentInbox\Concerns\HasInbox;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
@@ -18,7 +19,7 @@ use Relaticle\ActivityLog\Timeline\Sources\RelatedModelSource;
 use Relaticle\ActivityLog\Timeline\TimelineBuilder;
 use Spatie\Activitylog\Models\Concerns\LogsActivity;
 
-#[Fillable(['name', 'email', 'password'])]
+#[Fillable(['name', 'email', 'password', 'type_account'])]
 #[Hidden(['password', 'two_factor_secret', 'two_factor_recovery_codes', 'remember_token'])]
 class User extends Authenticatable implements HasTimeline
 {
@@ -35,6 +36,7 @@ class User extends Authenticatable implements HasTimeline
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'type_account' => TypeAccount::class,
         ];
     }
 
