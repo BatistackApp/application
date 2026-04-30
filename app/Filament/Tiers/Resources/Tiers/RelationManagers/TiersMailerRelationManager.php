@@ -27,6 +27,7 @@ use ToneGabes\Filament\Icons\Enums\Phosphor;
 class TiersMailerRelationManager extends RelationManager
 {
     protected static string $relationship = 'mailers';
+    protected static ?string $title = 'Publipostage';
 
     public function form(Schema $schema): Schema
     {
