@@ -8,6 +8,7 @@ use App\Filament\Tiers\Resources\Tiers\Pages\ListTiers;
 use App\Filament\Tiers\Resources\Tiers\Pages\ViewTiers;
 use App\Filament\Tiers\Resources\Tiers\RelationManagers\AddressesRelationManager;
 use App\Filament\Tiers\Resources\Tiers\RelationManagers\ContactsRelationManager;
+use App\Filament\Tiers\Resources\Tiers\RelationManagers\TiersMailerRelationManager;
 use App\Filament\Tiers\Resources\Tiers\Schemas\TiersForm;
 use App\Filament\Tiers\Resources\Tiers\Schemas\TiersInfolist;
 use App\Filament\Tiers\Resources\Tiers\Tables\TiersTable;
@@ -48,6 +49,7 @@ class TiersResource extends Resource
         return [
             AddressesRelationManager::class,
             ContactsRelationManager::class,
+            TiersMailerRelationManager::class,
         ];
     }
 

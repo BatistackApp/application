@@ -46,9 +46,17 @@
         .bg-gray-header {
             background-color: #f8fafc;
         }
+
+        .envelope-window {
+            position: absolute;
+            top: 55mm;
+            right: 20mm;
+            width: 90mm;
+            height: 35mm;
+        }
     </style>
 </head>
-<body class="bg-white text-slate-900 font-sans p-8">
+<body class="bg-white text-slate-900 font-sans p-8 antialiased">
     @yield('content')
 </body>
 </html>

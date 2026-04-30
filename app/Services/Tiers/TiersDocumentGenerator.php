@@ -2,6 +2,8 @@
 
 namespace App\Services\Tiers;
 
+use App\Enums\Tiers\TiersAddressType;
+use App\Models\Core\CompanyInfo;
 use App\Models\Tiers\Tiers;
 use App\Services\Core\DocumentService;
 use Illuminate\Support\Str;
@@ -39,10 +41,11 @@ class TiersDocumentGenerator extends DocumentService
     {
         $data = [
             'tiers' => $tiers,
-            'addresses' => $tiers->addresses()->get(),
-            'contacts' => $tiers->contacts()->get(),
-            'title' => 'Lettre',
+            'address' => $tiers->addresses()->where('address_type', TiersAddressType::INVOICING)->first(),
+            'contact' => $tiers->contacts()->first(),
+            'title' => $object,
             'content' => $content,
+            'company' => CompanyInfo::first(),
         ];
         $slug = Str::slug($object, '_');
 

@@ -62,6 +62,11 @@ class Tiers extends Model implements HasTimeline
         return $this->hasOne(TiersSettings::class);
     }
 
+    public function mailers(): HasMany
+    {
+        return $this->hasMany(TiersMailer::class);
+    }
+
     public function timeline(): TimelineBuilder
     {
         return TimelineBuilder::make($this)

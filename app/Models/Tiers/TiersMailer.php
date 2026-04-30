@@ -2,24 +2,21 @@
 
 namespace App\Models\Tiers;
 
+use App\Enums\Tiers\TiersMailerStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class TiersContact extends Model
+class TiersMailer extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'tiers_id',
-        'first_name',
-        'last_name',
-        'fonction',
-        'tel_fix',
-        'tel_portable',
-        'email',
-        'dgcp_concilent',
+        'subject',
+        'content',
+        'status',
+        'published_at',
     ];
 
     public function tiers(): BelongsTo
@@ -30,12 +27,8 @@ class TiersContact extends Model
     protected function casts(): array
     {
         return [
-            'dgcp_concilent' => 'boolean',
+            'published_at' => 'timestamp',
+            'status' => TiersMailerStatus::class,
         ];
-    }
-
-    public function getFullName(): string
-    {
-        return "{$this->first_name} {$this->last_name}";
     }
 }
