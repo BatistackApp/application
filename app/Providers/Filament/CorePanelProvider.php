@@ -2,6 +2,7 @@
 
 namespace App\Providers\Filament;
 
+use AchyutN\FilamentLogViewer\FilamentLogViewer;
 use Ariefng\FilamentCalculator\CalculatorPlugin;
 use Arshaviras\WeatherWidget\Widgets\WeatherWidget;
 use BezhanSalleh\PanelSwitch\PanelSwitch;
@@ -56,6 +57,7 @@ class CorePanelProvider extends PanelProvider
                 KnowledgeBaseCompanionPlugin::make()
                     ->knowledgeBasePanelId('knowledge-base'),
                 FilamentInboxPlugin::make(),
+                FilamentLogViewer::make(),
             ])
             ->middleware([
                 EncryptCookies::class,

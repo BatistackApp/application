@@ -8,6 +8,7 @@
     "require": {
         "php": "^8.3",
         "ext-fileinfo": "*",
+        "achyutn/filament-log-viewer": "^2.3",
         "ariefng/filament-calculator": "^1.2",
         "batistackapp/activity-log": "^1.0@alpha",
         "batistackapp/filament-map-picker": "^1.0",

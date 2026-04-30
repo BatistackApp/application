@@ -4,8 +4,94 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e0c7ac7e4ed5cb700f88b770107bf80d",
+    "content-hash": "fdeb4b84cb3b50c96ea5e92691440a2b",
     "packages": [
+        {
+            "name": "achyutn/filament-log-viewer",
+            "version": "v2.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/achyutkneupane/filament-log-viewer.git",
+                "reference": "6cd686810097935aa74088caa42448891be1a0c9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/achyutkneupane/filament-log-viewer/zipball/6cd686810097935aa74088caa42448891be1a0c9",
+                "reference": "6cd686810097935aa74088caa42448891be1a0c9",
+                "shasum": ""
+            },
+            "require": {
+                "filament/filament": "^5",
+                "livewire/livewire": "^4",
+                "phiki/phiki": "^2.0",
+                "php": ">=8.2"
+            },
+            "require-dev": {
+                "larastan/larastan": "^3.8",
+                "laravel/pint": "^1.27",
+                "orchestra/testbench": "^10.9",
+                "pestphp/pest": "^4.3",
+                "pestphp/pest-plugin-laravel": "^4.0",
+                "pestphp/pest-plugin-livewire": "^4.1",
+                "phpstan/phpstan": "^2.1",
+                "rector/rector": "^2.3"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "AchyutN\\FilamentLogViewer\\LogViewerProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "AchyutN\\FilamentLogViewer\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Achyut Neupane",
+                    "email": "achyutkneupane@gmail.com",
+                    "homepage": "https://achyut.com.np",
+                    "role": "Maintainer"
+                }
+            ],
+            "description": "A Filament package to view and manage Laravel logs.",
+            "keywords": [
+                "Viewer",
+                "filament",
+                "laravel",
+                "log"
+            ],
+            "support": {
+                "issues": "https://github.com/achyutkneupane/filament-log-viewer/issues",
+                "source": "https://github.com/achyutkneupane/filament-log-viewer/tree/v2.3.0"
+            },
+            "funding": [
+                {
+                    "url": "https://www.buymeacoffee.com/achyutn",
+                    "type": "buy_me_a_coffee"
+                },
+                {
+                    "url": "https://buymemomo.com/achyut",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/achyutkneupane",
+                    "type": "github"
+                },
+                {
+                    "url": "https://www.patreon.com/Achyut",
+                    "type": "patreon"
+                }
+            ],
+            "time": "2026-04-28T18:02:14+00:00"
+        },
         {
             "name": "archtechx/enums",
             "version": "v1.1.2",
@@ -16418,5 +16504,5 @@
         "ext-fileinfo": "*"
     },
     "platform-dev": {},
-    "plugin-api-version": "2.9.0"
+    "plugin-api-version": "2.6.0"
 }
