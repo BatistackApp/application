@@ -4,16 +4,20 @@ namespace App\Filament\Article\Resources\ArticleCategories\Pages;
 
 use App\Filament\Article\Resources\ArticleCategories\ArticleCategoryResource;
 use Filament\Actions\CreateAction;
-use Filament\Resources\Pages\ListRecords;
+use Openplain\FilamentTreeView\Resources\Pages\TreePage;
 
-class ListArticleCategories extends ListRecords
+class TreeCategories extends TreePage
 {
     protected static string $resource = ArticleCategoryResource::class;
+    protected static ?string $title = 'Catégories';
+    protected static ?string $breadcrumb = 'Categories';
 
     protected function getHeaderActions(): array
     {
         return [
-            CreateAction::make(),
+            CreateAction::make()
+                ->icon('heroicon-s-plus')
+                ->label('Nouvelle Catégorie'),
         ];
     }
 }

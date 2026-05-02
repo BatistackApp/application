@@ -13,7 +13,9 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('slug');
-            $table->foreignIdFor(ArticleCategory::class, 'parent_id');
+            $table->foreignIdFor(ArticleCategory::class, 'parent_id')->nullable()->constrained();
+            $table->integer('order')->default(0);
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
     }
