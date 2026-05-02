@@ -3,9 +3,11 @@
 namespace App\Models\Article;
 
 use App\Enums\Article\TrackingType;
+use App\Enums\Tiers\TiersCategory;
 use App\Enums\UnitOfMesure;
 use App\Models\Core\Warehouse;
 use App\Models\Tiers\Tiers;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -54,6 +56,13 @@ class Article extends Model
     public function prices(): HasMany
     {
         return $this->hasMany(ArticlePrice::class);
+    }
+
+    protected function firstPriceCustomer(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->prices()->where('price_type', TiersCategory::Customer)->first('amount'),
+        );
     }
 
     public function warehouses(): BelongsToMany
