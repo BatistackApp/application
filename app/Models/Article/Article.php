@@ -58,17 +58,17 @@ class Article extends Model
         return $this->hasMany(ArticlePrice::class);
     }
 
-    protected function firstPriceCustomer(): Attribute
-    {
-        return Attribute::make(
-            get: fn () => $this->prices()->where('price_type', TiersCategory::Customer)->first('amount'),
-        );
-    }
-
     public function warehouses(): BelongsToMany
     {
         return $this->belongsToMany(Warehouse::class, 'article_warehouse')
             ->withPivot('min_stock', 'max_stock', 'alert_stock', 'actual_stock', 'bin_location')
             ->withTimestamps();
+    }
+
+    protected function firstPriceCustomer(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->prices()->where('price_type', TiersCategory::Customer)->first()->amount,
+        );
     }
 }

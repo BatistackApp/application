@@ -12,7 +12,7 @@ class GeocodingService
 
     public function __construct()
     {
-        $this->apiKey = config('services.google.gemini_api_key');
+        $this->apiKey = config('services.google.maps_key');
     }
 
     /**
@@ -39,6 +39,7 @@ class GeocodingService
                 ]);
 
             $dataPlace = $response_place->json();
+            dd($dataPlace);
 
             $reponse_geo = Http::get('https://geocode.googleapis.com/v4/geocode/places/'.$dataPlace['suggestions'][0]['placePrediction']['placeId'].'?key='.$this->apiKey);
 

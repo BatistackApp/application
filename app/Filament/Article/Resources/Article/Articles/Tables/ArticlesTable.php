@@ -37,7 +37,8 @@ class ArticlesTable
                     ->sortable(),
 
                 TextColumn::make('first_price_customer')
-                    ->label('Prix Client'),
+                    ->label('Prix Client')
+                    ->money('EUR'),
             ])
             ->filters([
                 TrashedFilter::make(),

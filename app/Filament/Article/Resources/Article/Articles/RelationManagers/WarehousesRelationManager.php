@@ -16,6 +16,7 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Notifications\Notification;
 use Filament\Resources\RelationManagers\RelationManager;
+use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Schema;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
@@ -31,32 +32,40 @@ class WarehousesRelationManager extends RelationManager
     {
         return $schema
             ->components([
-                Select::make('warehouse_id')
-                    ->label('Dépot')
-                    ->options(Warehouse::get()->pluck('name', 'id'))
-                    ->searchable()
-                    ->preload()
-                    ->createOptionModalHeading('Nouveau Dépot')
-                    ->createOptionForm([
-                        TextInput::make('name')
-                            ->label('Désignation')
+                Grid::make(2)
+                    ->columnSpanFull()
+                    ->schema([
+                        Select::make('warehouse_id')
+                            ->label('Dépot')
+                            ->options(Warehouse::get()->pluck('name', 'id'))
+                            ->searchable()
+                            ->preload()
                             ->required(),
 
-                        TextInput::make('location')
-                            ->label('Adresse')
-                            ->helperText('Le système géolocalisera automatiquement le dépot'),
-                    ])
-                    ->createOptionUsing(function (array $data) {
-                        $warehouse = Warehouse::create($data);
+                        TextInput::make('bin_location')
+                            ->label('Localisation dans l\'entrepot'),
+                    ]),
 
-                        WarehouseLocatizationJob::dispatch($warehouse);
+                Grid::make(4)
+                    ->columnSpanFull()
+                    ->schema([
+                        TextInput::make('min_stock')
+                            ->label('Stock minimum')
+                            ->numeric(),
 
-                        Notification::make()
-                            ->success()
-                            ->title('Dépot Ajouter')
-                            ->send();
-                    })
-                    ->required(),
+                        TextInput::make('max_stock')
+                            ->label('Stock maximum')
+                            ->numeric(),
+
+                        TextInput::make('alert_stock')
+                            ->label('Stock d\'alerte')
+                            ->helperText('Déclenchera une alerte si < à ce champs')
+                            ->numeric(),
+
+                        TextInput::make('actual_stock')
+                            ->label('Stock actuel')
+                            ->numeric(),
+                    ]),
             ]);
     }
 
@@ -68,6 +77,7 @@ class WarehousesRelationManager extends RelationManager
             ->emptyStateIcon(Phosphor::Empty)
             ->emptyStateActions([
                 CreateAction::make()
+                    ->modalHeading('Ajouter un nouveau stock')
                     ->label('Inserer un nouveau stock')
                     ->icon('heroicon-s-plus'),
             ])
@@ -93,17 +103,18 @@ class WarehousesRelationManager extends RelationManager
                 //
             ])
             ->headerActions([
-                CreateAction::make(),
-                AttachAction::make(),
+                CreateAction::make()
+                    ->modalHeading('Ajouter un nouveau stock')
+                    ->icon('heroicon-s-plus')
+                    ->tooltip('Ajouter un stock')
+                    ->iconButton(),
             ])
             ->recordActions([
                 EditAction::make(),
-                DetachAction::make(),
                 DeleteAction::make(),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
-                    DetachBulkAction::make(),
                     DeleteBulkAction::make(),
                 ]),
             ]);
