@@ -2,6 +2,7 @@
 
 namespace App\Filament\Article\Resources\Article\Articles\RelationManagers;
 
+use App\Jobs\Core\WarehouseLocatizationJob;
 use App\Models\Core\Warehouse;
 use Filament\Actions\AttachAction;
 use Filament\Actions\BulkActionGroup;
@@ -46,7 +47,9 @@ class WarehousesRelationManager extends RelationManager
                             ->helperText('Le système géolocalisera automatiquement le dépot'),
                     ])
                     ->createOptionUsing(function (array $data) {
-                        Warehouse::create($data);
+                        $warehouse = Warehouse::create($data);
+
+                        WarehouseLocatizationJob::dispatch($warehouse);
 
                         Notification::make()
                             ->success()
