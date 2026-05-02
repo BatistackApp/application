@@ -33,6 +33,7 @@
         "nakanakaii/filament-countries": "^1.0",
         "nben/filament-record-nav": "^2.0",
         "opcodesio/log-viewer": "^3.24",
+        "openplain/filament-tree-view": "^0.5.5",
         "qalainau/filament-inbox": "^1.0",
         "saade/filament-autograph": "^4.1",
         "spatie/browsershot": "^5.2",
