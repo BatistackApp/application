@@ -6,6 +6,8 @@ use App\Filament\Article\Resources\Article\Articles\Pages\CreateArticle;
 use App\Filament\Article\Resources\Article\Articles\Pages\EditArticle;
 use App\Filament\Article\Resources\Article\Articles\Pages\ListArticles;
 use App\Filament\Article\Resources\Article\Articles\Pages\ViewArticle;
+use App\Filament\Article\Resources\Article\Articles\RelationManagers\PricesRelationManager;
+use App\Filament\Article\Resources\Article\Articles\RelationManagers\WarehousesRelationManager;
 use App\Filament\Article\Resources\Article\Articles\Schemas\ArticleForm;
 use App\Filament\Article\Resources\Article\Articles\Schemas\ArticleInfolist;
 use App\Filament\Article\Resources\Article\Articles\Tables\ArticlesTable;
@@ -47,7 +49,8 @@ class ArticleResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            PricesRelationManager::class,
+            WarehousesRelationManager::class,
         ];
     }
 
