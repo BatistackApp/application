@@ -32,15 +32,9 @@ class WarehousesRelationManager extends RelationManager
     {
         return $schema
             ->components([
-                Grid::make(2)
+                Grid::make(1)
                     ->columnSpanFull()
                     ->schema([
-                        Select::make('warehouse_id')
-                            ->label('Dépot')
-                            ->options(Warehouse::get()->pluck('name', 'id'))
-                            ->searchable()
-                            ->preload()
-                            ->required(),
 
                         TextInput::make('bin_location')
                             ->label('Localisation dans l\'entrepot'),
@@ -103,11 +97,34 @@ class WarehousesRelationManager extends RelationManager
                 //
             ])
             ->headerActions([
-                CreateAction::make()
+                AttachAction::make()
                     ->modalHeading('Ajouter un nouveau stock')
                     ->icon('heroicon-s-plus')
                     ->tooltip('Ajouter un stock')
-                    ->iconButton(),
+                    ->iconButton()
+                    ->schema(fn (AttachAction $action): array => [
+                        $action->getRecordSelect(),
+                        TextInput::make('bin_location')
+                            ->label('Localisation dans l\'entrepot'),
+
+                        TextInput::make('min_stock')
+                            ->label('Stock minimum')
+                            ->numeric(),
+
+                        TextInput::make('max_stock')
+                            ->label('Stock maximum')
+                            ->numeric(),
+
+                        TextInput::make('alert_stock')
+                            ->label('Stock d\'alerte')
+                            ->helperText('Déclenchera une alerte si < à ce champs')
+                            ->numeric(),
+
+                        TextInput::make('actual_stock')
+                            ->label('Stock actuel')
+                            ->numeric(),
+                    ])
+                    ->preloadRecordSelect(),
             ])
             ->recordActions([
                 EditAction::make(),
