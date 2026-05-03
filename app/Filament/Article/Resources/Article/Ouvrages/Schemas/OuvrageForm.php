@@ -30,7 +30,7 @@ class OuvrageForm
                                         Action::make('generateSKU')
                                             ->label('Générer')
                                             ->action(function (Set $set) {
-                                                return $set('sku', app(OuvrageService::class)->generateSKU());
+                                                return $set('sku', app(OuvrageService::class)->generateWithRetry());
                                             }),
                                     ])
                                     ->required(),

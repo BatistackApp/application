@@ -3,6 +3,7 @@
 namespace App\Filament\Article\Resources\Article\Ouvrages\Tables;
 
 use App\Models\Article\Ouvrage;
+use App\Services\Article\OuvrageService;
 use Filament\Actions\Action;
 use Filament\Actions\ActionGroup;
 use Filament\Actions\BulkActionGroup;
@@ -49,17 +50,17 @@ class OuvragesTable
                     DeleteAction::make(),
                     Action::make('active')
                         ->label('Activer')
-                        ->icon('heroicon-s-check')
+                        ->icon(Heroicon::Check)
                         ->color('success')
                         ->visible(fn (Ouvrage $record) => ! $record->is_active)
-                        ->action(fn (Ouvrage $record) => $record->update(['is_active' => true])),
+                        ->action(fn (Ouvrage $record) => app(OuvrageService::class)->activate($record)),
 
                     Action::make('inactive')
                         ->label('Désactiver')
                         ->icon(Heroicon::XMark)
                         ->color('danger')
                         ->visible(fn (Ouvrage $record) => $record->is_active)
-                        ->action(fn (Ouvrage $record) => $record->update(['is_active' => false])),
+                        ->action(fn (Ouvrage $record) => app(OuvrageService::class)->deactivate($record)),
                 ]),
             ])
             ->toolbarActions([
