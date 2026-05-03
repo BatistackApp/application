@@ -5,8 +5,9 @@ namespace App\Providers\Filament;
 use AchyutN\FilamentLogViewer\FilamentLogViewer;
 use Ariefng\FilamentCalculator\CalculatorPlugin;
 use Arshaviras\WeatherWidget\Widgets\WeatherWidget;
-use BezhanSalleh\PanelSwitch\PanelSwitch;
-use Croustibat\FilamentJobsMonitor\FilamentJobsMonitorPlugin;
+use Caresome\FilamentAuthDesigner\AuthDesignerPlugin;
+use Caresome\FilamentAuthDesigner\Data\AuthPageConfig;
+use Caresome\FilamentAuthDesigner\Enums\MediaPosition;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -15,8 +16,6 @@ use Filament\Pages\Dashboard;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
-use Filament\Widgets\AccountWidget;
-use Filament\Widgets\FilamentInfoWidget;
 use FilamentInbox\FilamentInboxPlugin;
 use Guava\FilamentKnowledgeBase\Plugins\KnowledgeBaseCompanionPlugin;
 use Hydrat\TableLayoutToggle\TableLayoutTogglePlugin;
@@ -58,6 +57,11 @@ class CorePanelProvider extends PanelProvider
                     ->knowledgeBasePanelId('knowledge-base'),
                 FilamentInboxPlugin::make(),
                 FilamentLogViewer::make(),
+                AuthDesignerPlugin::make()
+                    ->login(fn (AuthPageConfig $config) => $config
+                        ->media(asset('assets/background.jpg'))
+                        ->mediaPosition(MediaPosition::Cover)
+                        ->blur(8)),
             ])
             ->middleware([
                 EncryptCookies::class,

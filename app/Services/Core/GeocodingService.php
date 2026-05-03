@@ -39,7 +39,6 @@ class GeocodingService
                 ]);
 
             $dataPlace = $response_place->json();
-            dd($dataPlace);
 
             $reponse_geo = Http::get('https://geocode.googleapis.com/v4/geocode/places/'.$dataPlace['suggestions'][0]['placePrediction']['placeId'].'?key='.$this->apiKey);
 
