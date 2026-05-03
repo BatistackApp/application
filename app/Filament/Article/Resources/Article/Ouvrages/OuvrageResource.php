@@ -6,6 +6,7 @@ use App\Filament\Article\Resources\Article\Ouvrages\Pages\CreateOuvrage;
 use App\Filament\Article\Resources\Article\Ouvrages\Pages\EditOuvrage;
 use App\Filament\Article\Resources\Article\Ouvrages\Pages\ListOuvrages;
 use App\Filament\Article\Resources\Article\Ouvrages\Pages\ViewOuvrage;
+use App\Filament\Article\Resources\Article\Ouvrages\RelationManagers\ComponentsRelationManager;
 use App\Filament\Article\Resources\Article\Ouvrages\Schemas\OuvrageForm;
 use App\Filament\Article\Resources\Article\Ouvrages\Schemas\OuvrageInfolist;
 use App\Filament\Article\Resources\Article\Ouvrages\Tables\OuvragesTable;
@@ -51,7 +52,7 @@ class OuvrageResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            ComponentsRelationManager::class,
         ];
     }
 

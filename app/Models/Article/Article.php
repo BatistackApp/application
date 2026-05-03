@@ -70,6 +70,13 @@ class Article extends Model
             ->withTimestamps();
     }
 
+    public function ouvrages(): BelongsToMany
+    {
+        return $this->belongsToMany(Ouvrage::class, 'ouvrage_article')
+            ->withPivot('quantity_needed')
+            ->withTimestamps();
+    }
+
     protected function firstPriceCustomer(): Attribute
     {
         return Attribute::make(
