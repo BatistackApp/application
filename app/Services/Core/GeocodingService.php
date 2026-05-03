@@ -30,27 +30,11 @@ class GeocodingService
         }
 
         try {
-            $response_place = Http::withHeaders([
-                'X-Goog-Api-Key' => $this->apiKey,
-                'Content-Type' => 'application/json',
-            ])
-                ->post('https://places.googleapis.com/v1/places:autocomplete', [
-                    'input' => $address,
-                ]);
-
-            $dataPlace = $response_place->json();
-
-            $reponse_geo = Http::get('https://geocode.googleapis.com/v4/geocode/places/'.$dataPlace['suggestions'][0]['placePrediction']['placeId'].'?key='.$this->apiKey);
-
-            if ($reponse_geo->failed()) {
-                throw new Exception("Erreur de connexion à l'API Google Maps.");
-            }
-
-            $dataGeo = $reponse_geo->json();
+            $response = Http::get('https://maps.googleapis.com/maps/api/geocode/json?address='.$address.'&key='.$this->apiKey)->json();
 
             return [
-                'latitude' => $dataGeo['location']['latitude'],
-                'longitude' => $dataGeo['location']['longitude'],
+                'latitude' => $response['results'][0]['geometry']['location']['lat'],
+                'longitude' => $response['results'][0]['geometry']['location']['lng'],
             ];
         } catch (Exception $exception) {
             Log::error('Échec du calcul de distance Google : '.$exception->getMessage());
