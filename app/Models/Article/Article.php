@@ -58,6 +58,11 @@ class Article extends Model
         return $this->hasMany(ArticlePrice::class);
     }
 
+    public function serialNumbers(): HasMany
+    {
+        return $this->hasMany(ArticleSerialNumber::class);
+    }
+
     public function warehouses(): BelongsToMany
     {
         return $this->belongsToMany(Warehouse::class, 'article_warehouse')
@@ -68,7 +73,7 @@ class Article extends Model
     protected function firstPriceCustomer(): Attribute
     {
         return Attribute::make(
-            get: fn () => $this->prices()->where('price_type', TiersCategory::Customer)->first()->amount,
+            get: fn () => $this->prices()->where('price_type', TiersCategory::Customer)->first()->amount ?? 0,
         );
     }
 }
