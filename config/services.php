@@ -37,6 +37,7 @@ return [
 
     'google' => [
         'gemini_api_key' => env('GEMINI_API_KEY'),
+        'maps_key' => env('GOOGLE_MAPS_KEY'),
     ],
 
     'siren' => [
