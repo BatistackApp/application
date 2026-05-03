@@ -37,7 +37,7 @@ class ArticleForm
                                         Action::make('generateSKU')
                                             ->label('Générer')
                                             ->action(function (Set $set) {
-                                                return $set('sku', app(ArticleService::class)->generateSKU());
+                                                return $set('sku', app(ArticleService::class)->generateWithRetry());
                                             }),
                                     ])
                                     ->required(),
