@@ -36,6 +36,7 @@ class AppServiceProvider extends ServiceProvider
                     'knowledge-base',
                     'tiers',
                     'article',
+                    'chantier',
                 ])
                 ->modalHeading('Espaces')
                 ->icons([
@@ -43,12 +44,14 @@ class AppServiceProvider extends ServiceProvider
                     'knowledge-base' => Phosphor::Book,
                     'tiers' => Phosphor::UserCircleBold,
                     'article' => Phosphor::BoundingBox,
+                    'chantier' => Phosphor::HardHat,
                 ])
                 ->labels([
                     'core' => 'Configurations',
                     'knowledge-base' => 'Base de connaissance',
                     'tiers' => 'Tiers',
                     'article' => 'Articles & Stocks',
+                    'chantier' => 'Chantiers',
                 ]);
         });
 
