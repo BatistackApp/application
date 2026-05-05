@@ -186,6 +186,7 @@ class StockMouvementService
      * Met à jour le statut d'un numéro de série selon le type de mouvement.
      */
     private function applySerialNumberEffect(
+        StockMouvement $mouvement,
         StockMouvementType $type,
         int $serialNumberId,
         array $options,
@@ -201,13 +202,15 @@ class StockMouvementService
                 : SerialNumberStatus::IN_STOCK,
         };
 
+        $targetWarehouseId = match ($type) {
+            StockMouvementType::ENTRY, StockMouvementType::RETURN => $mouvement->warehouse_id, // Le dépôt où l'article est entré/retourné
+            StockMouvementType::TRANSFER => $mouvement->target_warehouse_id, // Le dépôt de destination du transfert
+            default => null, // Pour EXIT, ADJUSTEMENT (LOSS), le numéro de série n'est plus en stock dans un dépôt spécifique ou n'a pas de dépôt
+        };
+
         $serial->update([
             'status' => $status,
-            'warehouse_id' => match ($type) {
-                StockMouvementType::ENTRY, StockMouvementType::RETURN => $serial->warehouse_id, // <-- Correction ici
-                StockMouvementType::TRANSFER => $options['target_warehouse_id'],
-                default => null, // Pour EXIT, ADJUSTEMENT (LOSS)
-            },
+            'warehouse_id' => $targetWarehouseId,
         ]);
     }
 

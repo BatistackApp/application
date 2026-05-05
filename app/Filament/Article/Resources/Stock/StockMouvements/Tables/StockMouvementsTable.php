@@ -87,12 +87,6 @@ class StockMouvementsTable
                 SelectFilter::make('article_id')
                     ->label('Article')
                     ->relationship('article', 'name'),
-            ])
-            ->recordActions([])
-            ->toolbarActions([
-                BulkActionGroup::make([
-                    DeleteBulkAction::make(),
-                ]),
             ]);
     }
 }
