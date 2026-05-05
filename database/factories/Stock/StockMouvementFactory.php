@@ -1,6 +1,6 @@
 <?php
 
-namespace Database\Factories;
+namespace Database\Factories\Stock;
 
 use App\Models\Article\Article;
 use App\Models\Article\ArticleSerialNumber;

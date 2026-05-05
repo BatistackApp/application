@@ -1,7 +1,9 @@
 <?php
 
-namespace Database\Factories;
+namespace Database\Factories\Article;
 
+use App\Enums\Article\TrackingType;
+use App\Enums\UnitOfMesure;
 use App\Models\Article\Article;
 use App\Models\Article\ArticleCategory;
 use App\Models\Tiers\Tiers;
@@ -18,8 +20,8 @@ class ArticleFactory extends Factory
             'sku' => $this->faker->word(),
             'name' => $this->faker->name(),
             'description' => $this->faker->text(),
-            'unit' => $this->faker->word(),
-            'tracking_type' => $this->faker->word(),
+            'unit' => $this->faker->randomElement(UnitOfMesure::class),
+            'tracking_type' => $this->faker->randomElement(TrackingType::class),
             'barcode' => $this->faker->word(),
             'qr_code_base' => $this->faker->word(),
             'poids' => $this->faker->randomFloat(),

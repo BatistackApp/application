@@ -1,6 +1,6 @@
 <?php
 
-namespace Database\Factories;
+namespace Database\Factories\Tiers;
 
 use App\Models\Tiers\Tiers;
 use App\Models\Tiers\TiersContact;

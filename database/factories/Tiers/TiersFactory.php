@@ -1,6 +1,6 @@
 <?php
 
-namespace Database\Factories;
+namespace Database\Factories\Tiers;
 
 use App\Enums\Civility;
 use App\Enums\Tiers\TiersCategory;
@@ -17,7 +17,7 @@ class TiersFactory extends Factory
     {
         $siren = $this->faker->unique()->numerify('#########');
         $category = $this->faker->randomElement(TiersCategory::class);
-        $prefixCode = match ($category) {
+        $prefixCode = match ($category->value) {
             'customer' => 'CUS',
             'supplier' => 'SP',
             'subcontractor' => 'SU',
