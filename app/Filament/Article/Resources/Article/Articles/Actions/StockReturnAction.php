@@ -59,7 +59,7 @@ class StockReturnAction
                     $service->create(
                         type: StockMouvementType::RETURN,
                         article: $record,
-                        warehouse: Warehouse::find($data['warehouse_id']),
+                        warehouse: Warehouse::findOrFail($data['warehouse_id']),
                         quantity: (float) $data['quantity'],
                         user: auth()->user(),
                         options: array_filter([

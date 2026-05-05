@@ -76,7 +76,7 @@ class StockTransferAction
                     $service->create(
                         type: StockMouvementType::TRANSFER,
                         article: $record,
-                        warehouse: Warehouse::find($data['warehouse_id']),
+                        warehouse: Warehouse::findOrFail($data['warehouse_id']),
                         quantity: (float) $data['quantity'],
                         user: auth()->user(),
                         options: [
