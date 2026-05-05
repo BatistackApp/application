@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 #[ObservedBy([ChantierObserver::class])]
+#[ObservedBy([ChantierObserver::class])]
 class Chantier extends Model
 {
     use HasFactory, SoftDeletes;
