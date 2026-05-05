@@ -24,7 +24,11 @@ class InventoryLinesRelationManager extends RelationManager
     public function table(Table $table): Table
     {
         return $table
-            ->defaultSort('article.name')
+            ->modifyQueryUsing(fn ($query) => $query
+                ->join('articles', 'articles.id', '=', 'inventory_lines.article_id')
+                ->select('inventory_lines.*')
+                ->orderBy('articles.name')
+            )
             ->columns([
                 TextColumn::make('article.sku')
                     ->label('SKU')
