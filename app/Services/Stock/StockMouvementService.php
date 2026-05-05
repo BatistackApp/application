@@ -203,9 +203,11 @@ class StockMouvementService
 
         $serial->update([
             'status' => $status,
-            'warehouse_id' => in_array($type, [StockMouvementType::ENTRY, StockMouvementType::RETURN])
-                ? $serial->warehouse_id
-                : ($type === StockMouvementType::TRANSFER ? $options['target_warehouse_id'] : null),
+            'warehouse_id' => match ($type) {
+                StockMouvementType::ENTRY, StockMouvementType::RETURN => $serial->warehouse_id, // <-- Correction ici
+                StockMouvementType::TRANSFER => $options['target_warehouse_id'],
+                default => null, // Pour EXIT, ADJUSTEMENT (LOSS)
+            },
         ]);
     }
 
