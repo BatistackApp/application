@@ -5,8 +5,9 @@ namespace App\Filament\Article\Resources\Stock\StockMouvements\Tables;
 use App\Enums\Article\StockMouvementType;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
-use Filament\Actions\EditAction;
+use Filament\Forms\Components\DatePicker;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\Filter;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 
@@ -59,6 +60,22 @@ class StockMouvementsTable
                     ->placeholder('—'),
             ])
             ->filters([
+                Filter::make('created_at')
+                    ->schema([
+                        DatePicker::make('date_from')
+                            ->label('Du')
+                            ->default(now()->startOfMonth()),
+                        DatePicker::make('date_to')
+                            ->label('Au')
+                            ->default(now()),
+                    ])
+                    ->query(function ($query, array $data) {
+                        return $query
+                            ->when($data['date_from'], fn ($q, $date) => $q->whereDate('created_at', '>=', $date))
+                            ->when($data['date_to'], fn ($q, $date) => $q->whereDate('created_at', '<=', $date));
+                    })
+                    ->label('Période'),
+
                 SelectFilter::make('type')
                     ->label('Type de mouvement')
                     ->options(StockMouvementType::class),
@@ -66,6 +83,10 @@ class StockMouvementsTable
                 SelectFilter::make('warehouse_id')
                     ->label('Dépôt')
                     ->relationship('warehouse', 'name'),
+
+                SelectFilter::make('article_id')
+                    ->label('Article')
+                    ->relationship('article', 'name'),
             ])
             ->recordActions([])
             ->toolbarActions([
