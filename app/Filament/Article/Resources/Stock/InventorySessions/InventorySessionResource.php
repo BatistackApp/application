@@ -6,6 +6,7 @@ use App\Filament\Article\Resources\Stock\InventorySessions\Pages\CreateInventory
 use App\Filament\Article\Resources\Stock\InventorySessions\Pages\EditInventorySession;
 use App\Filament\Article\Resources\Stock\InventorySessions\Pages\ListInventorySessions;
 use App\Filament\Article\Resources\Stock\InventorySessions\Pages\ViewInventorySession;
+use App\Filament\Article\Resources\Stock\InventorySessions\RelationManagers\InventoryLinesRelationManager;
 use App\Filament\Article\Resources\Stock\InventorySessions\Schemas\InventorySessionForm;
 use App\Filament\Article\Resources\Stock\InventorySessions\Schemas\InventorySessionInfolist;
 use App\Filament\Article\Resources\Stock\InventorySessions\Tables\InventorySessionsTable;
@@ -48,7 +49,7 @@ class InventorySessionResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            InventoryLinesRelationManager::class,
         ];
     }
 
@@ -58,8 +59,12 @@ class InventorySessionResource extends Resource
             'index' => ListInventorySessions::route('/'),
             'create' => CreateInventorySession::route('/create'),
             'view' => ViewInventorySession::route('/{record}'),
-            'edit' => EditInventorySession::route('/{record}/edit'),
         ];
+    }
+
+    public static function canEdit(\Illuminate\Database\Eloquent\Model $record): bool
+    {
+        return false;
     }
 
     public static function getRecordRouteBindingEloquentQuery(): Builder
