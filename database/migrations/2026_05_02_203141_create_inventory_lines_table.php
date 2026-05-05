@@ -17,11 +17,16 @@ return new class extends Migration {
             $table->decimal('counted_quantity', 15, 3)->nullable();
             $table->decimal('difference')->virtualAs('counted_quantity - theoretical_quantity');
             $table->timestamps();
+
+            $table->unique(['inventory_session_id', 'article_id'], 'inventory_lines_session_article_unique');
         });
     }
 
     public function down(): void
     {
         Schema::dropIfExists('inventory_lines');
+        Schema::table('inventory_lines', function (Blueprint $table) {
+            $table->dropUnique('inventory_lines_session_article_unique');
+        });
     }
 };
