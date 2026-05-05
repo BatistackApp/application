@@ -74,7 +74,7 @@ enum ChantierStatus: string implements HasColor, HasDescription, HasIcon, HasLab
             self::ACTIVE => in_array($next, [self::PAUSED, self::CLOSED]),
             self::PAUSED => in_array($next, [self::ACTIVE, self::CLOSED]),
             self::CLOSED => in_array($next, [self::ARCHIVED, self::ACTIVE]),
-            self::ARCHIVED => [],
+            self::ARCHIVED => false,
         };
     }
 }

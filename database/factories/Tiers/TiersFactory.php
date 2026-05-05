@@ -38,4 +38,12 @@ class TiersFactory extends Factory
             'updated_at' => Carbon::now(),
         ];
     }
+
+    public function customer(): static
+    {
+        return $this->state([
+            'category' => TiersCategory::Customer,
+            'typology' => TiersTypology::Entreprise,
+        ]);
+    }
 }
