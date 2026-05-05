@@ -2,6 +2,12 @@
 
 namespace App\Filament\Article\Resources\Article\Articles\Tables;
 
+use App\Filament\Article\Resources\Article\Articles\Actions\StockAdjustmentAction;
+use App\Filament\Article\Resources\Article\Articles\Actions\StockEntryAction;
+use App\Filament\Article\Resources\Article\Articles\Actions\StockExitAction;
+use App\Filament\Article\Resources\Article\Articles\Actions\StockReturnAction;
+use App\Filament\Article\Resources\Article\Articles\Actions\StockTransferAction;
+use Filament\Actions\ActionGroup;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\CreateAction;
 use Filament\Actions\DeleteBulkAction;
@@ -46,6 +52,15 @@ class ArticlesTable
             ->recordActions([
                 ViewAction::make(),
                 EditAction::make(),
+                ActionGroup::make([
+                    StockEntryAction::make(),
+                    StockExitAction::make(),
+                    StockTransferAction::make(),
+                    StockAdjustmentAction::make(),
+                    StockReturnAction::make(),
+                ])
+                    ->icon('heroicon-s-arrows-right-left')
+                    ->tooltip('Mouvements de stock'),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

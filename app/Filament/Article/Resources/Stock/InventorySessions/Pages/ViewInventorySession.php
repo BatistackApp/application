@@ -2,9 +2,11 @@
 
 namespace App\Filament\Article\Resources\Stock\InventorySessions\Pages;
 
+use App\Filament\Article\Resources\Stock\InventorySessions\Actions\InventoryWorkflowActions;
+use App\Filament\Article\Resources\Stock\InventorySessions\Actions\PrintInventoryAction;
 use App\Filament\Article\Resources\Stock\InventorySessions\InventorySessionResource;
-use Filament\Actions\EditAction;
 use Filament\Resources\Pages\ViewRecord;
+use Illuminate\Contracts\Support\Htmlable;
 
 class ViewInventorySession extends ViewRecord
 {
@@ -13,7 +15,17 @@ class ViewInventorySession extends ViewRecord
     protected function getHeaderActions(): array
     {
         return [
-            EditAction::make(),
+            PrintInventoryAction::make(),
+            InventoryWorkflowActions::startCounting(),
+            InventoryWorkflowActions::close(),
+            InventoryWorkflowActions::reopen(),
+            InventoryWorkflowActions::validate(),
+            InventoryWorkflowActions::cancel(),
         ];
+    }
+
+    public function getTitle(): string|Htmlable
+    {
+        return "Inventaire : {$this->getRecord()->reference}";
     }
 }
