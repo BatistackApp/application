@@ -5,11 +5,14 @@ namespace App\Models\RH;
 use App\Enums\RH\JourSemaine;
 use App\Enums\RH\TypeContrat;
 use App\Models\User;
+use App\Observers\RH\EmployeeObserver;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+#[ObservedBy([EmployeeObserver::class])]
 class Employee extends Model
 {
     use HasFactory;

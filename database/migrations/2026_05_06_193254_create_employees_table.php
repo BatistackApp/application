@@ -13,6 +13,7 @@ return new class extends Migration {
             $table->id();
 
             $table->foreignIdFor(User::class)
+                ->nullable()
                 ->unique()
                 ->constrained()
                 ->cascadeOnDelete();
