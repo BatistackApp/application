@@ -15,6 +15,8 @@ use App\Notifications\RH\PointageRejeteNotification;
 use App\Notifications\RH\PointageValideNotification;
 use App\Services\Chantier\ChantierBudgetService;
 use Carbon\Carbon;
+use Carbon\CarbonInterface;
+use Illuminate\Database\UniqueConstraintViolationException;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
 
@@ -31,25 +33,31 @@ class PointageService
      */
     public function createSession(
         Employee $employee,
-        Carbon $semaine,
+        Carbon|CarbonInterface $semaine,
         ?string $notes = null,
     ): PointageSession {
-        return DB::transaction(function () use ($employee, $semaine, $notes) {
-            $lundi = $semaine->copy()->startOfWeek();
+        try {
+            return DB::transaction(function () use ($employee, $semaine, $notes) {
+                $lundi = $semaine->copy()->startOfWeek();
 
-            $this->ensureNoExistingSession($employee, $lundi);
+                $this->ensureNoExistingSession($employee, $lundi);
 
-            $session = PointageSession::create([
-                'employee_id' => $employee->id,
-                'semaine_du' => $lundi->toDateString(),
-                'status' => PointageStatus::DRAFT,
-                'notes' => $notes,
+                $session = PointageSession::create([
+                    'employee_id' => $employee->id,
+                    'semaine_du' => $lundi->toDateString(),
+                    'status' => PointageStatus::DRAFT,
+                    'notes' => $notes,
+                ]);
+
+                $this->generateLines($session, $employee, $lundi);
+
+                return $session;
+            });
+        } catch (UniqueConstraintViolationException $e) {
+            throw ValidationException::withMessages([
+                'semaine_du' => "Une session existe déjà pour la semaine du {$semaine->copy()->startOfWeek()->format('d/m/Y')}.",
             ]);
-
-            $this->generateLines($session, $employee, $lundi);
-
-            return $session;
-        });
+        }
     }
 
     /**
