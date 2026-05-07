@@ -35,9 +35,6 @@ class TiersPanelProvider extends PanelProvider
             ])
             ->discoverResources(in: app_path('Filament/Tiers/Resources'), for: 'App\Filament\Tiers\Resources')
             ->discoverPages(in: app_path('Filament/Tiers/Pages'), for: 'App\Filament\Tiers\Pages')
-            ->pages([
-                Dashboard::class,
-            ])
             ->discoverWidgets(in: app_path('Filament/Tiers/Widgets'), for: 'App\Filament\Tiers\Widgets')
             ->plugins([
                 CalculatorPlugin::make(),
