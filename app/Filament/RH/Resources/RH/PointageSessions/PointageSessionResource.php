@@ -47,7 +47,7 @@ class PointageSessionResource extends Resource
     public static function getRelations(): array
     {
         return [
-            PointageLinesRelation::class
+            PointageLinesRelation::class,
         ];
     }
 

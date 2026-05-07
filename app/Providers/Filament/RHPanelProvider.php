@@ -29,6 +29,7 @@ class RHPanelProvider extends PanelProvider
         return $panel
             ->id('rh')
             ->path('rh')
+            ->login()
             ->colors([
                 'primary' => Color::Indigo,
             ])

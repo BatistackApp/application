@@ -29,6 +29,7 @@ class ArticlePanelProvider extends PanelProvider
         return $panel
             ->id('article')
             ->path('article')
+            ->login()
             ->colors([
                 'primary' => Color::Blue,
             ])

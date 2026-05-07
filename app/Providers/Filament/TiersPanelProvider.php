@@ -30,6 +30,7 @@ class TiersPanelProvider extends PanelProvider
         return $panel
             ->id('tiers')
             ->path('tiers')
+            ->login()
             ->colors([
                 'primary' => Color::Blue,
             ])
