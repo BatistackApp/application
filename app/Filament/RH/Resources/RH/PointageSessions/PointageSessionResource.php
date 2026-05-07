@@ -6,6 +6,7 @@ use App\Filament\RH\Resources\RH\PointageSessions\Pages\CreatePointageSession;
 use App\Filament\RH\Resources\RH\PointageSessions\Pages\EditPointageSession;
 use App\Filament\RH\Resources\RH\PointageSessions\Pages\ListPointageSessions;
 use App\Filament\RH\Resources\RH\PointageSessions\Pages\ViewPointageSession;
+use App\Filament\RH\Resources\RH\PointageSessions\RelationManagers\PointageLinesRelation;
 use App\Filament\RH\Resources\RH\PointageSessions\Schemas\PointageSessionForm;
 use App\Filament\RH\Resources\RH\PointageSessions\Schemas\PointageSessionInfolist;
 use App\Filament\RH\Resources\RH\PointageSessions\Tables\PointageSessionsTable;
@@ -46,7 +47,7 @@ class PointageSessionResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            PointageLinesRelation::class
         ];
     }
 
