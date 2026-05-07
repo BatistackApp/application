@@ -29,6 +29,7 @@ class ChantierPanelProvider extends PanelProvider
         return $panel
             ->id('chantier')
             ->path('chantier')
+            ->login()
             ->colors([
                 'primary' => Color::Orange,
             ])
