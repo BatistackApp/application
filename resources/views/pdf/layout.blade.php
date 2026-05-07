@@ -55,6 +55,7 @@
             height: 35mm;
         }
     </style>
+    @yield('styles')
 </head>
 <body class="bg-white text-slate-900 font-sans p-8 antialiased">
     @yield('content')
