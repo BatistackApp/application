@@ -37,6 +37,7 @@ class AppServiceProvider extends ServiceProvider
                     'tiers',
                     'article',
                     'chantier',
+                    'rh',
                 ])
                 ->modalHeading('Espaces')
                 ->icons([
@@ -45,6 +46,7 @@ class AppServiceProvider extends ServiceProvider
                     'tiers' => Phosphor::UserCircleBold,
                     'article' => Phosphor::BoundingBox,
                     'chantier' => Phosphor::HardHat,
+                    'rh' => Phosphor::UsersThree,
                 ])
                 ->labels([
                     'core' => 'Configurations',
@@ -52,6 +54,7 @@ class AppServiceProvider extends ServiceProvider
                     'tiers' => 'Tiers',
                     'article' => 'Articles & Stocks',
                     'chantier' => 'Chantiers',
+                    'rh' => 'RH/Pointage',
                 ]);
         });
 
