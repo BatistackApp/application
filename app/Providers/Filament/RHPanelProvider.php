@@ -34,9 +34,6 @@ class RHPanelProvider extends PanelProvider
             ])
             ->discoverResources(in: app_path('Filament/RH/Resources'), for: 'App\Filament\RH\Resources')
             ->discoverPages(in: app_path('Filament/RH/Pages'), for: 'App\Filament\RH\Pages')
-            ->pages([
-                Dashboard::class,
-            ])
             ->discoverWidgets(in: app_path('Filament/RH/Widgets'), for: 'App\Filament\RH\Widgets')
             ->plugins([
                 CalculatorPlugin::make(),

@@ -34,9 +34,6 @@ class ArticlePanelProvider extends PanelProvider
             ])
             ->discoverResources(in: app_path('Filament/Article/Resources'), for: 'App\Filament\Article\Resources')
             ->discoverPages(in: app_path('Filament/Article/Pages'), for: 'App\Filament\Article\Pages')
-            ->pages([
-                Dashboard::class,
-            ])
             ->discoverWidgets(in: app_path('Filament/Article/Widgets'), for: 'App\Filament\Article\Widgets')
             ->plugins([
                 CalculatorPlugin::make(),
