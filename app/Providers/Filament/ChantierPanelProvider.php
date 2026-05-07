@@ -34,9 +34,6 @@ class ChantierPanelProvider extends PanelProvider
             ])
             ->discoverResources(in: app_path('Filament/Chantier/Resources'), for: 'App\Filament\Chantier\Resources')
             ->discoverPages(in: app_path('Filament/Chantier/Pages'), for: 'App\Filament\Chantier\Pages')
-            ->pages([
-                Dashboard::class,
-            ])
             ->plugins([
                 CalculatorPlugin::make(),
                 TableLayoutTogglePlugin::make()
