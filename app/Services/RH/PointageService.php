@@ -221,13 +221,6 @@ class PointageService
     {
         $this->ensureSessionEditable($line->session);
 
-        // Exclusivité panier_repas / grand_deplacement
-        if (! empty($data['grand_deplacement']) && $data['grand_deplacement']) {
-            $data['panier_repas'] = false;
-        } elseif (! empty($data['panier_repas']) && $data['panier_repas']) {
-            $data['grand_deplacement'] = false;
-        }
-
         $line->update($data);
 
         return $line->fresh();
