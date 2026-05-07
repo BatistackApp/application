@@ -3,10 +3,13 @@
 namespace App\Models\RH;
 
 use App\Enums\RH\JourSemaine;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class RhConfiguration extends Model
 {
+    use HasFactory;
+
     protected $fillable = [
         'heures_matin',
         'heures_aprem',
