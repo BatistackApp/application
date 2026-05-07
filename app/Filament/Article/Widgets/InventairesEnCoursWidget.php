@@ -22,6 +22,8 @@ class InventairesEnCoursWidget extends TableWidget
     {
         return $table
             ->query(fn (): Builder => InventorySession::with(['warehouse', 'user'])
+                ->withCount('lines') // Ajoute un champ 'lines_count'
+                ->withCount(['lines as counted_lines_count' => fn ($query) => $query->whereNotNull('counted_quantity')]) // Ajoute un champ 'counted_lines_count'
                 ->whereIn('status', [
                     InventorySessionStatus::OPEN,
                     InventorySessionStatus::COUNTING,
@@ -49,8 +51,8 @@ class InventairesEnCoursWidget extends TableWidget
                 TextColumn::make('progression')
                     ->label('Progression')
                     ->state(function (InventorySession $record) {
-                        $total = $record->lines()->count();
-                        $comptes = $record->lines()->whereNotNull('counted_quantity')->count();
+                        $total = $record->lines_count; // Utilise le count préchargé
+                        $comptes = $record->counted_lines_count; // Utilise le count préchargé
 
                         if ($total === 0) {
                             return '0 %';

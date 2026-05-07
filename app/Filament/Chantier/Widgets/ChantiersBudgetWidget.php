@@ -3,6 +3,8 @@
 namespace App\Filament\Chantier\Widgets;
 
 use App\Models\Chantier\Chantier;
+use App\Models\Chantier\ChantierBudgetLine;
+use App\Models\Chantier\ChantierCout;
 use App\Services\Chantier\ChantierBudgetService;
 use Filament\Widgets\ChartWidget;
 
@@ -18,13 +20,20 @@ class ChantiersBudgetWidget extends ChartWidget
     {
         $budgetService = app(ChantierBudgetService::class);
 
-        $chantiers = Chantier::enCours()
-            ->with(['budgetLines'])
-            ->get()
-            ->sortByDesc(function ($chantier) use ($budgetService) {
-                return $budgetService->getBudgetTotal($chantier);
-            })
+        $chantiersQuery = Chantier::enCours()
+            ->with(['budgetLines']) // Garder pour l'hydratation si nécessaire
+            ->addSelect([
+                'budget_total' => ChantierBudgetLine::selectRaw('SUM(count_total)')
+                    ->whereColumn('chantier_id', 'chantiers.id')
+                    ->limit(1), // Ou une sous-requête plus complexe si getBudgetTotal est plus complexe
+                'cout_reel' => ChantierCout::selectRaw('SUM(montant_ht)') // Exemple, adapter au modèle réel des coûts
+                    ->whereColumn('chantier_id', 'chantiers.id')
+                    ->limit(1),
+            ])
+            ->orderByDesc('budget_total')
             ->take(5);
+
+        $chantiers = $chantiersQuery->get();
 
         $labels = [];
         $budgets = [];
