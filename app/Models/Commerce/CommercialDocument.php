@@ -7,6 +7,7 @@ use App\Enums\Commerce\DocumentType;
 use App\Models\Chantier\Chantier;
 use App\Models\Tiers\Tiers;
 use App\Observers\Commerce\CommercialDocumentObserver;
+use Attribute;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -93,15 +94,30 @@ class CommercialDocument extends Model
 
     // ─── Accesseurs ──────────────────────────────────────────────────────────
 
-    public function getSoldeAttribute(): float
+    /**
+     * Calcule le solde en utilisant la somme pré-calculée si disponible,
+     * sinon en faisant une requête.
+     */
+    protected function solde(): Attribute
     {
-        if (! in_array($this->type, [DocumentType::FACTURE, DocumentType::FACTURE_ACOMPTE])) {
-            return 0.0;
-        }
+        return Attribute::make(
+            get: function (): float {
+                if (! $this->isFacture()) {
+                    return 0.0;
+                }
 
-        $totalPaiements = (float) $this->paiements()->sum('montant');
+                // Utilise la somme eager-loaded par withSum('paiements', 'montant')
+                // Le nom par défaut est 'paiements_sum_montant'
+                if (isset($this->paiements_sum_montant)) {
+                    $totalPaiements = (float) $this->paiements_sum_montant;
+                } else {
+                    // Fallback si la somme n'est pas chargée (ex: accès direct à un modèle)
+                    $totalPaiements = (float) $this->paiements()->sum('montant');
+                }
 
-        return round((float) $this->total_ttc - $totalPaiements, 2);
+                return round((float) $this->total_ttc - $totalPaiements, 2);
+            }
+        );
     }
 
     public function isFacture(): bool
