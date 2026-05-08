@@ -3,10 +3,18 @@
 namespace App\Observers\Commerce;
 
 use App\Models\Commerce\CommercialDocument;
+use App\Services\Commerce\CommercialDocumentService;
 use Log;
 
 class CommercialDocumentObserver
 {
+    public function creating(CommercialDocument $document): void
+    {
+        if (!$document->reference) {
+            $document->reference = app(CommercialDocumentService::class)->generateReference($document->type);
+        }
+    }
+
     public function created(CommercialDocument $document): void
     {
         $this->recalculateTotals($document);

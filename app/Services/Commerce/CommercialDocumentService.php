@@ -285,4 +285,6 @@ class CommercialDocumentService
 
         return $document->fresh();
     }
+
+
 }

@@ -38,6 +38,7 @@ class AppServiceProvider extends ServiceProvider
                     'article',
                     'chantier',
                     'rh',
+                    'commerce',
                 ])
                 ->modalHeading('Espaces')
                 ->icons([
@@ -47,6 +48,7 @@ class AppServiceProvider extends ServiceProvider
                     'article' => Phosphor::BoundingBox,
                     'chantier' => Phosphor::HardHat,
                     'rh' => Phosphor::UsersThree,
+                    'commerce' => Phosphor::CurrencyEur,
                 ])
                 ->labels([
                     'core' => 'Configurations',
@@ -55,6 +57,7 @@ class AppServiceProvider extends ServiceProvider
                     'article' => 'Articles & Stocks',
                     'chantier' => 'Chantiers',
                     'rh' => 'RH/Pointage',
+                    'commerce' => 'Gestion Commercial',
                 ]);
         });
 
