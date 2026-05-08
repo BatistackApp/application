@@ -44,4 +44,9 @@ return [
         'api_key' => env('SIREN_API_KEY'),
         'base_url' => env('SIREN_API_BASE_URL'),
     ],
+
+    'n8n' => [
+        'token' => env('N8N_TOKEN'),
+        'webhook_url' => env('N8N_WEBHOOK_URL'),
+    ],
 ];
