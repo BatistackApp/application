@@ -12,20 +12,22 @@ class MonitoringController extends Controller
 {
     public function getQueueStats(Request $request): JsonResponse
     {
-        $token = config('services.n8n.token');
-        if (! $token || $token !== config('services.n8n.token')) {
+        $expectedToken = config('services.n8n.token');
+        $providedToken = $request->header('X-API-TOKEN') ?? $request->query('token'); // Ou autre méthode de récupération
+
+        if (! $expectedToken || $providedToken !== $expectedToken) {
             return response()->json(['message' => 'Unauthorized'], 401);
         }
 
         // 2. Récupération de la taille des queues principales
-        $queues = ['default', 'documents', 'geocoding']; // Liste tes queues ici
+        $queues = config('queue.monitoring', ['default']); // Liste tes queues ici
         $stats = [];
         foreach ($queues as $queue) {
             $stats[$queue] = Queue::size($queue);
         }
 
         // 3. Détection des "Stuck Jobs" (Jobs réservés depuis plus de 60 min)
-        $oneHourAgo = Carbon::now()->subMinutes(60)->timestamp;
+        $oneHourAgo = Carbon::now()->subMinutes(60);
 
         $stuckJobs = DB::table('jobs')
             ->whereNotNull('reserved_at')
@@ -34,12 +36,13 @@ class MonitoringController extends Controller
             ->get()
             ->map(function ($job) {
                 $payload = json_decode($job->payload, true);
+
                 return [
                     'id' => $job->id,
                     'queue' => $job->queue,
                     'job_class' => $payload['displayName'] ?? 'Unknown',
                     'attempts' => $job->attempts,
-                    'reserved_since' => Carbon::createFromTimestamp($job->reserved_at)->diffForHumans(),
+                    'reserved_since' => Carbon::createFromTimeString($job->reserved_at)->diffForHumans(),
                 ];
             });
 

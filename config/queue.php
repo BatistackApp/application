@@ -126,4 +126,10 @@ return [
         'table' => 'failed_jobs',
     ],
 
+    'monitoring' => [
+        'default',
+        'documents',
+        'geocodings'
+    ],
+
 ];
