@@ -28,7 +28,7 @@ return new class extends Migration {
             $table->string('status')->default(EcritureStatus::BROUILLON->value);
 
             // Source polymorphique (facture, paie, mouvement bancaire...)
-            $table->morphs('source');
+            $table->nullableMorphs('source');
 
             // Traçabilité
             $table->foreignIdFor(User::class, 'created_by')
