@@ -5,6 +5,8 @@ namespace Database\Seeders;
 use App\Models\Core\CompanyInfo;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Database\Seeders\Compta\JournauxSeeder;
+use Database\Seeders\Compta\PlanComptableSeeder;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Artisan;
 
@@ -33,5 +35,8 @@ class DatabaseSeeder extends Seeder
             'siret' => '00000000000000',
             'ape' => '0000Z',
         ]);
+
+        $this->call(PlanComptableSeeder::class);
+        $this->call(JournauxSeeder::class);
     }
 }
