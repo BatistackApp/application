@@ -1,5 +1,10 @@
 <?php
 
+use App\Enums\Compta\CompteType;
+use App\Enums\Compta\JournalType;
+use App\Models\Compta\ExerciceComptable;
+use App\Models\Compta\Journal;
+use App\Models\Compta\PlanComptable;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -43,6 +48,69 @@ expect()->extend('toBeOne', function () {
 | global functions to help you to reduce the number of lines of code in your test files.
 |
 */
+
+// Helpers globaux pour les tests compta
+function createExerciceEnCours(): ExerciceComptable
+{
+    return ExerciceComptable::factory()->create([
+        'libelle' => 'Exercice '.now()->year,
+        'date_debut' => now()->startOfYear(),
+        'date_fin' => now()->endOfYear(),
+        'cloture' => false,
+    ]);
+}
+
+function createJournalVentes(): Journal
+{
+    return Journal::firstOrCreate(
+        ['code' => 'VE'],
+        [
+            'libelle' => 'Ventes',
+            'type' => JournalType::VENTES,
+            'actif' => true,
+        ]
+    );
+}
+
+function createComptesStandard(): array
+{
+    return [
+        'client' => PlanComptable::firstOrCreate(
+            ['numero' => '411000'],
+            [
+                'libelle' => 'Clients',
+                'type' => CompteType::CLASSE_4,
+                'actif' => true,
+                'lettrable' => true,
+            ]
+        ),
+        'produit' => PlanComptable::firstOrCreate(
+            ['numero' => '707000'],
+            [
+                'libelle' => 'Ventes de marchandises',
+                'type' => CompteType::CLASSE_7,
+                'actif' => true,
+                'analytique' => true,
+            ]
+        ),
+        'tva_collectee' => PlanComptable::firstOrCreate(
+            ['numero' => '445710'],
+            [
+                'libelle' => 'TVA collectée',
+                'type' => CompteType::CLASSE_4,
+                'actif' => true,
+            ]
+        ),
+        'banque' => PlanComptable::firstOrCreate(
+            ['numero' => '512000'],
+            [
+                'libelle' => 'Banque',
+                'type' => CompteType::CLASSE_5,
+                'actif' => true,
+            ]
+        ),
+    ];
+}
 
 function something()
 {

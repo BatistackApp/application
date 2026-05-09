@@ -75,6 +75,18 @@ class ReportException
                 $module = 'Tiers';
             }
 
+            if (
+                str_contains($file, 'app/Filament/Compta') ||
+                str_contains($file, 'app/Enums/Compta') ||
+                str_contains($file, 'app/Jobs/Compta') ||
+                str_contains($file, 'app/Mails/Compta') ||
+                str_contains($file, 'app/Models/Compta') ||
+                str_contains($file, 'app/Notifications/Compta') ||
+                str_contains($file, 'app/Observers/Compta')
+            ) {
+                $module = 'Tiers';
+            }
+
             Http::async()->withHeaders([
                 'X-N8N-TOKEN' => config('services.n8n.token'),
             ])
